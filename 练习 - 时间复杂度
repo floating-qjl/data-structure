@@ -1,0 +1,24 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <stdlib.h>
+long long* fib(size_t n)
+{
+	long long* fat = (long long*)malloc(sizeof(long long) * (n+1));
+	fat[0] = 0;
+	if (n = 0)
+		return fat;
+	else
+	{
+		fat[1] = 1;
+		for (int a = 2;a <= n;a++)
+		{
+			fat[a] = fat[a - 1] + fat[a - 2];
+		}
+	}
+	return fat;
+}
+int main()
+{
+	printf("%d\n", fib(50));
+	return 0;
+}
