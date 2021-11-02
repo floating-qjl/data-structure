@@ -1,0 +1,33 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+//顺序表的特点：以物理位置相邻表示逻辑关系，任一元素均可随机存取（优点）
+
+//顺序表：地址连续、依次存放、随机存取、类型相同    意味着可以使用 一维数组 表示顺序表
+
+//线性表长度可变（删除）数组长度不可动态定义        因此可以使用一变量表示顺序表的长度属性
+
+//例如：
+
+#define a 10000   //图书表可能达到的最大长度
+
+typedef struct  //图书信息定义
+{
+	char no[20];//图书ISBN
+	char name[50];//图书名字
+	float price;//图书价格
+}Book;
+
+typedef struct
+{
+	Book* elem;//存储空间的基地址
+	int length;//图书表中当前图书个数
+}SqList;//图书表的顺序存储结构类型为SqList
+
+
+int main()
+{
+
+
+	return 0;
+}
