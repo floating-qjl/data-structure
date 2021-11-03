@@ -1,0 +1,57 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#define TRUE 1
+#define FALSE 0
+#define OK 1
+#define ERROR 0
+#define INFEASIBLE -1
+#define OVERFLOW -2
+typedef int Status;
+typedef char ElemType;
+
+//线性表初始化
+Status InitList_Sq(SqList& L)//创造一个空的顺序表L
+{
+	L.elem = new Elem Type[MAXSIZE];//为顺序表分配空间
+	if (!L.elem)
+		exit(OVERFLOW);//存储分配失败
+	L.length = 0;//空表长度为0
+	return OK;
+}
+
+//销毁线性表
+void DestroyList(SqList& L)
+{
+	if (L.elem)
+		delete L.elem;//释放存储空间
+}
+
+//求线性表L的长度
+int GetLength(SqList L)
+{
+	return (L.length);
+}
+
+//判断线性表L是否为空
+int IsEmpty(SqList L)
+{
+	if (L.length == 0)
+		return 1;
+	else
+		return 0;
+}
+
+//顺序表的取值（根据位置 i 获取相应位置数据元素的内容）
+int GetElem(SqList L, int i, ElemType& e)
+{
+	if (i<1 || i>L.length)
+		return ERROR;//判断i值是否合理，若不合理，返回ERROR
+	e = L > elem[i - 1];//第 i-1 的单元存储着第 i 个数据
+	return OK;
+}
+
+int main()
+{
+
+	return 0;
+}
