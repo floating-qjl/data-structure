@@ -1,0 +1,28 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+
+#define TRUE 1
+#define FALSE 0
+#define OK 1
+#define ERROR 0
+#define INFEASIBLE -1
+#define OVERFLOW -2
+typedef int Status;
+typedef char ElemType;
+
+//顺序表的查找
+//在线性表L中查找与指定值e相同的数据元素的位置
+//从表的一端开始，逐个进行记录的关键字和给定值的比较。找到，返回该元素的位置序号，未找到，返回0
+
+//平均查找长度ASL
+//为确定记录在表中的位置，需要与给定值进行比较的关键字的个数的期望值叫做查找算法的平均查找长度
+// ASL = p1 + 2*p2 +……+ (n-1)*p(n-1) + n*pn
+//假设每个记录的查找概率相等：pi = 1/n
+//则：(1/n)*(1+2+3+……+n) = (n+1)/2
+
+//
+
+int main()
+{
+
+	return 0;
+}
