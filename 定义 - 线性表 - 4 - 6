@@ -1,0 +1,40 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#define TRUE 1
+#define FALSE 0
+#define OK 1
+#define ERROR 0
+#define INFEASIBLE -1
+#define OVERFLOW -2
+typedef int Status;
+typedef char ElemType;
+
+//顺序表的删除
+//算法思想：判断删除位置 i 是否合法
+//          将欲删除的元素保留在e中
+//将第 i + 1 至第 n 位的元素依次向前移动一个位置
+//表长减1，删除成功返回 OK
+
+Status ListDelete_Sq(SqList& L, int i)
+{
+	if (i<1 || i>L.length)
+		return ERROR;// i 值不合法
+	for (j = i;i <= L.length - 1;i++)
+	{
+		L.elem[j - 1] = L.elem[j];//被删除元素之后的元素前移
+	}
+	L.length--;//表长减1
+	return OK;
+}
+//算法时间耗费：
+//若删除尾结点，则根本无法移动（特别快）
+//若删除首结点，则表中 n-1 个元素全部迁移（特别慢）
+//若要考虑在各种位置删除（共 n 种可能）的平均移动次数：
+//(1/n)*(n-1 + n-1 +……+ 1 + 0) = (1/n)*((n-1)*n)/2 = (n-1)/2
+
+//则顺序表删除算法的平均时间复杂度为 O(n)
+
+int main()
+{
+
+	return 0;
+}
