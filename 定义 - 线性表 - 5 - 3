@@ -1,0 +1,83 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+//单链表基本操作的实现
+
+//单链表的初始化：1.生成新结点作头结点，用头指针 L 指向头结点
+//                2.将头结点的指针域置空
+
+//status InitList_L(LinkList &L)
+//{
+//	L = new LNode;//或 L = (LinkList)malloc(sizeof(LNode));
+//	L->next = NULL;
+//	return OK;
+//}
+
+//判断链表是否为空
+//空表：链表中无元素，称为空链表（头指针和头结点仍在）
+//int ListEmpty(LinkList L)
+//{
+//	if (L->next)   //非空
+//		return 0;
+//	else
+//		return 1;
+//}
+
+//单链表的销毁
+//从头指针开始，依次释放所有结点
+//设置变量指向头结点（头指针），使头指针指向头结点的指针域（下一个结点）L = L->next，然后将变量释放 free(p)
+//结束条件：L==NULL
+//status DestroyList(LinkList& L)
+//{
+//	Lnode* p;//设置变量
+//	while (L)
+//	{
+//		p = L;
+//		L = L->next;
+//		free(p);
+//	}
+//	return OK;
+//}
+
+//清空单链表
+//链表仍存在，但链表中无元素，成为空链表（头指针和头结点仍然在）
+//依次释放所有结点，并将头结点指针域设置为空
+// 设置两个变量，依次改变地址
+//此处没有 释放和操作 头指针
+//结束条件：p == NULL（若是 q == NULL，则会少执行一次）
+//status ClearList(LinkList& L)  //将 L 重置为空表
+//{
+//	Lnode* p, * q;
+//	p = L->next;
+//	while (p)      //判断是否到达了表尾
+//	{
+//		q = p->next;
+//		free(p);
+//		p = q;
+//	}
+//	L->next = NULL;//头结点指针域为空
+//	return OK;
+//}
+
+//求链表的表长
+int ListLength_L(LinkList L)
+{
+	LinkList p;
+	p = L->next;//p 指向第一个结点
+	i = 0;
+	while (p)//遍历单链表，统计结点数
+	{
+		i++;
+		p = p->next;
+	}
+	return i;
+}
+
+
+
+
+int main()
+{
+
+	return 0;
+}
