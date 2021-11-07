@@ -1,0 +1,69 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+//单链表的建立
+
+//头插法：元素插入在链表头部，也叫前插法
+//1.从一个空表开始，重复读入数据
+//2.生成新结点，将读入数据存放到新结点的数据域中
+//3.从最后一个结点开始，依次将各结点插入到链表的前端
+//例如：建立链表L（a，b，c，d，e）
+//L->头结点
+//L->头结点->e
+//L->头结点->d->e
+//L->头结点->c->d->e
+//L->头结点->b->c->d->e
+//L->头结点->a->b->c->d->e
+//L = (LinkList)malloc(sizeof(LNode));//创建头结点
+//L->next = NULL;
+//p = (LinkList)malloc(sizeof(LNode));//创建末尾结点的空间
+//p->data = an;
+//p->next = L->next;
+//L->next = p;
+//然后进行重复运算
+
+//算法描述
+void CreateList_H(LinklIST& l, int n)
+{
+	L = new LNode;
+	L->next = NULL;//先建立一个带头结点的单链表
+	for (i = n;i > 0;i--)
+	{
+		p = new LNode;//生成新结点 p = (LNode*)malloc(sizeof(LNode))
+		scanf("%d", &p->data);//输入元素值
+		p->next = L->next;//插入到表头
+		L->next = p;
+	}
+}
+
+
+//尾插法：元素插在链表尾部，也叫后插法
+//1.从一个空表L开始，将新结点诸葛插入到链表的尾部，尾指针 r 指向链表的尾结点
+//2.初始时，r 同 L 均指向头结点，每读入一个数据元素则申请一个新结点，将新结点插入到尾结点后，r指向新结点
+//p->data = a;
+//p->next = NULL;
+//r->next = p;
+//r = p;
+//正位序
+void CreateList_R(LinkList& L, int n)
+{
+	L = new LNode;
+	L->next = NULL;
+	r = L;//尾指针 r 指向头结点
+	for (i = 0;i < n;i++)
+	{
+		p = new LNode;
+		scanf("%d", &p->data);//生成新结点，输入元素值
+		p->next = NULL;
+		r->next = p;//插入到尾表
+		r = p;//r 指向新的尾结点
+	}
+}
+
+
+
+int main()
+{
+	
+	return 0;
+}
