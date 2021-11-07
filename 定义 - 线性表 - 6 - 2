@@ -1,0 +1,27 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+//带 尾指针 循环链表的合并
+//操作：p 存表头结点，Tb 表头连接到了 Ta 表尾，释放 Tb 表头结点，修改指针
+//p = Ta->next;
+//Ta->next = Tb->next->next;
+//delete Tb->next;
+//Tb->next = p;
+
+//算法描述：
+LinkList Connect(LinkList Ta, LinkList Tb)
+{   //假设Ta,Tb都是非空的单循环链表
+	p = Ta->next;//p 存表头结点
+	Ta->next = Tb->next->next;//Tb 表头连结 Ta 表尾
+	delete Tb->next;//释放 Tb 表头结点（free(Tb->next)）
+	Tb->next = p;//修改指针
+	return Tb;
+}
+//时间复杂度为 O(1)
+
+
+int main()
+{
+	
+	return 0;
+}
