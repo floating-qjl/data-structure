@@ -1,0 +1,42 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+//双向链表的插入
+// --a-- --b--   要在 a 和 b 之间插入 --x--   p 指向 b ，s 指向 x 
+//则关系式应写成 s->prior = p->prior; p->prior->next = s; s->next=p; p->prior = s;
+//算法分析：
+void ListInsert_DuL(duLinkList& L, int i, ElemType e)
+{
+	if (!(p = GetElemP_DuL(L, i)))
+		return ERROR;
+	s = new DuLNode;
+	s->date = e;
+	s->prior = p->prior;
+	p->prior->next = s;
+	s->next = p;
+	p->prior = s;
+	return OK;
+}
+
+
+//双向链表的删除
+// --a-- --b-- --c--    删除掉 b 链表，且 p 指向b
+// p->prior->next = p->next; p->next->prior = p->prior;
+void ListDelete_Dul(DuLink& L, int i, ElemType& e)
+{
+	//删除带头结点的双向循环链表 L 的第 i 个元素，并用 e 返回
+	if (!(p = GetElemP_Dul(L, i)))
+		return ERROR;//O(n)
+	e = p->data;
+	p->prior->next = p->next;
+	p->next->prior = p->prior;
+	free(p);
+	return OK;//O(1)
+}
+//总的时间复杂度为 O(n)
+
+int main()
+{
+
+	return 0;
+}
