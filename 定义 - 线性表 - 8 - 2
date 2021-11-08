@@ -1,0 +1,57 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+//线性表的应用
+//线性表合并：La = (7,5,3,11)，Lb = (2,6,3)  --->  La = (7,5,3,11,2,6)
+//算法分析：依次取出 Lb 中的每个元素，1.在 La 中查找该元素
+//                                    2.如果找不到，则将其插入 La 的最后
+void union(List& La, List Lb)
+{
+	La_len = Listlength(La);
+	Lb_len = ListLength(Lb);
+	for (i = 1;i <= Lb_Len;i++)
+	{
+		GetElem(Lb, i, e);
+		if (!Locateelem(La, e))
+			ListInsert(&La, ++La_len, e);
+	}
+}
+//时间复杂度为：O( Lb_len * La_len )
+
+
+//有序表的合并:La = (1,7,8)  Lb = (2,4,6,8,10,11)  --->  Lc = (1,2,4,6,7,8,8,10,11) 
+//算法分析：1.创建一个空表 Lc
+//          2.依次从 La 或 Lb 中摘取元素值较小的结点插入到 Lc 表的最后，直至其中一个表变空为止
+//          3.继续将 La 或 Lb 其中一个表的剩余结点插入在 Lc 表的最后
+
+//使用顺序表来实现：
+void MergeList_Sq(SqList LA, SqList LB, SqList &LC)
+{
+	pa = LA.elem;
+	pb = LB.elem;//指针 pa 和 pb 的初值分别指向两个表的第一个元素
+	LC.length = LA.length + LB.length;//新表的长度为待合并两表的长度之和
+	LC.elem = new ElemType[LC.length];//为合并后的新表分配一个数组空间
+	pc = LC.elem;//指针 pc 指向新表的第一个元素
+	pa_last = LA.elem + LA.length - 1;//指针 pa_last 指向 LA 表的最后一个元素
+	pb_last = LB.elem + LB.length - 1;//指针 pb_last 指向 LB 表的最后一个元素
+
+	while (pa <= pa_last && pb <= pb_last)  //两个表都为 非空
+	{
+		if (*pa <= *pb)
+			*pc++ = *pa++;
+		else
+			*pc++ = *pb++;//依次摘取两表中较小的结点
+	}
+	while (pa <= pa_last)
+		*pc++ = *pa++;//LB 表已到达表尾，将 LA 中剩余元素加入 LC
+	while (pb <= pb_last)
+		*pc++ = *pb++;//LA 表已到达表尾，将 LB 中剩余元素加入 LC
+}
+//时间复杂度：O( ListLength(La) + ListLength(Lb) )
+//空间复杂度：O( ListLength(La) + ListLength(Lb) )
+
+int main()
+{
+
+	return 0;
+}
