@@ -1,0 +1,28 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+//图书信息管理系统
+//经常查找书，可以使用顺序表 ，经常增删查改，可以使用链表
+struct Book
+{
+	char id[20];//ISBN
+	char name[50];//书名
+	int price;//书价
+};
+typedef struct
+{  //顺序表
+	Book* elem;
+	int length;
+};
+typedef struct LNode
+{  //链表
+	Book data;
+	struct LNode* next;
+};
+
+
+int main()
+{
+
+	return 0;
+}
