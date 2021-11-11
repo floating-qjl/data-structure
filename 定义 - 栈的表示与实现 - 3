@@ -1,0 +1,50 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+//算法补充
+//顺序栈判断栈是否为空
+Status StackEmpty(SqStack S)
+{  //若栈为空，返回TRUE，否则返回FALSE
+	if (S.top == S.base)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+//求顺序栈长度
+int StackLength(SqStack S)
+{
+	return S.top - S.base;
+}
+
+//清空顺序栈
+Status ClearStack(SqStack S)
+{
+	if (S.base)
+		S.top = S.base;
+	return OK;
+}
+
+//销毁顺序栈
+status DestroyStack(SqStack& S)
+{
+	if (S.base)
+	{
+		delete S.base;
+		S.stacksize = 0;
+		S.base = S.top = NULL;
+	}
+	return 0;
+}
+
+//顺序栈的入栈
+//算法分析：判断是否栈满，若满则出错（上溢）
+//          元素 e 压入栈顶
+//          栈顶指针加1
+Status Push(SqStack& S, SElemType e)
+{
+	if (S.top - S.base == S.stacksize)//栈满
+		return ERROR;
+	*S.top++ = e;
+	return OK;
+}
