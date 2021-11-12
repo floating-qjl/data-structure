@@ -1,0 +1,80 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+//链表的表示和实现
+
+//顺序栈的出栈
+//算法分析：1.判断是否栈空，若空则出错（下溢）
+//          2.获取栈顶元素
+//          3.栈顶指针减1
+Status Pop(Sqstack& S, SElemType& e)
+{
+	//若栈不空，则删除S的栈顶元素，用e返回其值，并返回OK，否则返回ERROR
+	if (S.top == S.base)//等价于if(StackEmpty(S))
+		return ERROR;
+	e = *--S.top;
+	return OK;
+}
+
+//链栈是运算受限的单链表，只能在链表头部进行操作
+typedef struct stacknode
+{
+	selemtype data;
+	struct stacknode* next;
+}stacknode,*linkstack;
+linkstack S;
+
+//s-> an|next -> a(n-1)|next ->…… -> a1|next
+//     栈顶                             栈底         注意链栈中的指针方向
+
+//链表的头指针就是栈顶
+//不需要头结点
+//基本不存在栈满的情况
+//空栈相当于头指针指向空
+//插入和删除仅在栈顶处执行
+
+//链栈的初始化
+void Initstack(Linkstack& S)
+{
+	//构造一个空栈，栈顶指针置为空
+	S = NULL;
+	return OK;
+}
+
+//判断链栈是否为空
+status stackempty(Linkstack S)
+{
+	if (S == NULL)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+//链栈的入栈
+status push(Linkstack& S, Selemtype e)
+{
+	p = new stacknode;//生成新结点p
+	p->data = e;//将新结点数据域置为e
+	p->next = S;//将新结点插入栈顶
+	S = p;//修改栈顶指针
+	return OK;
+}
+
+//链栈的出栈
+status pop(Linkstack& S, Selemtype& e)
+{
+	if (S == NULL)
+		return ERROR;
+	e = S->data;
+	p = S;
+	S = S->next;
+	delete p;
+	return OK;
+}
+
+//取栈顶元素
+Selemtype _get_printf_count_output(Linkstack S)
+{
+	if (S != NULL)
+		return S->data;
+}
