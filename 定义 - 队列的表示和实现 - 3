@@ -1,0 +1,42 @@
+//队列的初始化
+status InitQueue(SqQueue& Q)
+{
+	Q.base = new QElemType[max];//分配数组空间
+	if (!Q.base)
+		exit(OVERFLOW);//存储分配失败
+	Q.front = Q.rear = 0;//头指针尾指针置为0，队列为空
+	return OK;
+}
+
+//求队列的长度
+int QueueLength(SqQueue Q)
+{
+	return ((Q.rear - Q.front + max) % max);
+}
+
+//循环队列入队
+status EnQueue(SqQueue &Q, QElemType e)
+{
+	if ((Q.rear + 1) % max == Q.front)
+		return ERROR;//队满
+	Q.base[Q.rear] = e;//新元素加入队尾
+	Q.rear = (Q.rear + 1) % max;//队尾指针 + 1
+	return OK;
+}
+
+//循环队列出队
+status DeQueue(SqQueue& Q, QElemType e)
+{
+	if (Q.front == Q.rear)
+		return ERROR;//队空
+	e = Q.base[Q.front];//保存队头元素
+	Q.front = (Q.front + 1) % max;//队头指针+1
+	return OK;
+}
+
+//取队头元素
+SElemType GetHead(SqQueue Q)
+{
+	if (Q.front != Q.rear)
+		return Q.base[Q.front];//返回队头指针元素的值，队头指针不变
+}
