@@ -1,0 +1,64 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
+//串、数组和广义表
+
+//串：内容受限的线性表
+//零个或多个任意字符组成的有限序列
+//  S  =  "a1a2……an"
+//串名        串值       n 为串长，当n = 0时为空串
+//字串：串中任意个连续字符组成的子序列（含空串）称为该串的子串
+//真字串：不包含自身的子串
+//主串：包含子串的串相应地称为主串
+//字符位置：字符在序列中的序号为该字符在串中的位置
+//子串位置：子串第一个字符在主串中的位置
+//空格串：由一个或多个空格组成的串，与空串不同
+//串相等：当且仅当两个串的长度相等并且各个对应位置上的字符都相等时，这两个串才是相等的
+//所有空串是相等的
+
+//案例1：病毒感染检测
+//算法分析：检测某种病毒DNA序列是否在患者的DNA序列中出现过，如果出现过，则此人感染了病毒，否则没有感染
+//例如：假设病毒的DNA为baa，患者1的DNA序列为aaabbba，感染者2的DNA序列为babbba，则未感染
+//注意：人的DNA序列是线性的，而病毒的DNA序列是环状的 --- 即 baa 可以替换成 aab，aabb 替换为 baab
+
+
+//串的类型定义、存储结构及运算
+ADT String
+{
+	数据对象：D = {ai | ai属于CharacterSet,i = 1,2,……,n,n >= 0};
+    数据关系：R1 = { <a(i - 1),ai> | a(i - 1),ai属于D,i = 1,2,……,n };
+	基本操作：StrAssign(&T, chars);//串赋值
+	StrCompare(S, T);//串比较
+	StrLength(S);//求串长
+	Concat(&T, S1, S2);//串连结
+	SubString(&Sub, pos, len);//求子串
+	StrCopy(&T, S);//串拷贝
+	……………………
+}
+
+//串中元素逻辑结构关系和线性表的相同，串可以采用与线性表相同的存储结构（顺序串，链串）
+//串的顺序存储结构
+#define max 255
+typedef struct 
+{
+		char ch[max+1];//存储串的一维数组（一般会不使用 0 的空间）
+		int length;//串的当前长度
+}SString;
+
+//串的链式存储结构
+//优点：操作方便   缺点：存储密度较低 （串值所占的存储/实际分配的存储（包括地址的大小））
+//因此可以将多个字符存放在一个结点中，以克服其缺点
+#define chunksize 80  //块的大小可由用户定义
+typedef struct Chunk
+{
+	char ch[chunksize];
+	struct Chunk* next;
+}Chunk;
+
+typedef struct
+{
+	Chunk* head;//串的头指针
+	Chunk* tail;//串的尾指针
+	int curlen;//串的当前长度
+}LString;//字符串的块链结构
+
