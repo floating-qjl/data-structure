@@ -1,0 +1,35 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+
+//二叉树的存储结构
+//二叉树的顺序存储，实现：按满二叉树的结点层次编号，依次存放二叉树中的数据元素
+//表示：
+#define MAX 100
+Typedef TElem Type SqBiTree[MAX]
+SqBiTree bt;
+//存储方式：将 二叉树 的结点按照 满二叉树 的方式进行编号，将存在的结点存储到相应的位置上，空的位置为 0 或 不存
+//缺点：深度为 k 的且只有 k 个结点的单支树需要长度为 2^k - 1 的一维数组，浪费空间
+//特点：结点间关系蕴含在其存储位置中，浪费空间，适于存 满二叉树 和 完全二叉树
+
+
+//二叉树的链式存储结构
+//表示：
+typedef struct BiNode
+{
+	TElemType data;
+	struct BiNode* lchild, * rchild;//左右孩子指针
+}BiNode,*BiTree;
+
+//在 n 个结点的二叉链表中，有 n + 1 个空指针域
+//分析：n 个结点一定有 2n 个指针域（链域），且 每个结点都有一条链指向 唯一双亲（除了 根结点），因此有 n - 1 个
+//存放了有效指针的链域，而剩下的 2n - （n - 1）= n + 1 即为空指针域
+
+
+//三叉链表
+//表示：
+typedef struct TriTNode
+{
+	TElemType data;
+	struct TriTNode* lchild, *parent, * rchild;//左右孩子指针和指向双亲的指针
+}TriTNode, * TriTree;
