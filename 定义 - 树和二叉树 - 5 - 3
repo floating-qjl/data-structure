@@ -1,0 +1,36 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+
+//中序遍历
+status InOrderTraverse(BiTree T)
+{
+	if (T == NULL)
+		return OK;//空二叉树
+	else
+	{
+		InOrderTraverse(T->lchild);//递归遍历左子树
+		visit(T);//访问根结点
+		InorderTraverse(T->rchild);//递归遍历右子树
+	}
+}
+
+
+//后序遍历
+status PostOrderTraverse(BiTree T)
+{
+	if (T == NULL)
+		return OK;
+	else
+	{
+		PostOrderTraverse(T->lchild);
+		PostOrderTraverse(T->rchild);
+		visit(T);
+	}
+}
+
+//如果去掉输出语句，从递归的角度上看，三种算法是完全相同的，或说这三种算法的访问路径是相同的，只是访问结点的时机不同
+//每个结点经过三次，第一次经过时访问：先序遍历；第二次经过时访问：中序遍历；第三次经过时访问：后序遍历
+
+//时间复杂度：O（n）--- 表示共访问 n 个结点，每个结点只访问一次，三个算法时间复杂度相同
+//空间复杂度：O（n）--- 栈占用的最大辅助空间，即每个结点都要先存储再访问（最坏情况）
