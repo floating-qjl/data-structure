@@ -1,0 +1,30 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+
+//中序遍历非递归算法
+ //算法分析：二叉树中序遍历的非递归算法的关键在中序遍历过某结点的整个左子树后，如何找到该结点的根以及右子树
+//基本思想：1.建立一个栈
+//          2.根结点进栈，遍历左子树
+//          3.根结点出栈，输出根节点，遍历右子树
+status InOrderTreverse(BiTree T)
+{
+	BiTree p;
+	InitStack(S);//初始化栈 S
+	p = T;
+	while (p || !StackEmpty(S))//结点不空 或 栈不空
+	{
+		if (p)
+		{
+			push(S, p);//入栈结点
+			p = p->lchild;
+		}
+		else
+		{
+			Pop(S, q);//弹出栈顶元素，放在 q 中
+			printf("%c", q->data);
+			p = q->rchild;
+		}
+	}
+	return OK;
+}
