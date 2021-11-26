@@ -1,0 +1,22 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+
+//二叉树的建立
+//按先序遍历序列建立二叉树的二叉链表;1.从键盘输入二叉树的结点信息，建立二叉树的存储结构
+//                                   2.在建立二叉树的过程中按照二叉树先序方式建立
+status CreatBiTree(BiTree& T)
+{
+	scanf(&ch);
+	if (ch == "#")
+		T = NULL;
+	else
+	{
+		if (!(T = (BiTNode*)malloc(sizeof(BiTNode))))
+			exit(OVERFLOW);//T=new BiTNode
+		T->data = ch;//生成根结点
+		CreateBiTree(T->lchild);//构造左子树
+		CreateBiTree(T->rchild);//构造右子树
+	}
+	return OK;
+}
