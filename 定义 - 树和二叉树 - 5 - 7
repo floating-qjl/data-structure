@@ -1,0 +1,67 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+
+//复制二叉树
+//如果是空树，递归结束
+//否则，申请新结点空间，复制根结点
+//递归复制左子树
+//递归复制右子树
+int Copy(BiTree T, BiTree &NewT)
+{
+	if (T == NULL)
+	{
+		NewT = NULL;
+		return 0;
+	}
+	else
+	{
+		NewT = new BiTNode;
+		NewT->data = T->data;
+		Copy(T->lChild, NewT->lchild);
+		Copy(T->rChild, NewT->rchild);
+	}
+}
+
+//计算二叉树的深度
+//如果是空树，则深度为0
+//否则，递归计算左子树的深度记为 m，递归计算右子树的深度记为 n，二叉树的深度则为 m 与 n 中的较大者，再加一
+int Depth(BiTree T)
+{
+	if (T == NULL)
+		return 0;//如果是空树返回0
+	else
+	{
+		m = Depth(T->lChild);
+		n = Depth(T->rChild);
+		if (m > n)
+			return (m + 1);
+		else
+			return (n + 1);
+	}
+}
+
+
+//如果是空树，则结点个数为0
+//否则，结点个数 为 左子树的节点个数+右子树的结点个数+1
+int NodeCount(BiTree T)
+{
+	if (T == NULL)
+		return 0;
+	else
+		return NodeCount(T->lchild) + NodeChild(T->rchild) + 1;
+}
+
+
+//计算二叉树叶子结点数
+//如果是空树，则叶子结点个数为0
+//否则，为 左子树的叶子结点数+右子树的叶子结点数
+int LeadCount(BiTree T)
+{
+	if (T == NULL)
+		return 0;//如果是空树返回0
+	if (T->lchild == NULL && T->rchild == NULL)
+		return 1;
+	else
+		return LeadCount(T->lchild) + LesdCount(T->rchild);
+}
