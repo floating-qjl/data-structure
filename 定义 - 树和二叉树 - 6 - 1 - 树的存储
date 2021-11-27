@@ -1,0 +1,54 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+
+//树和森林
+
+//树 是 n（n>=0）个结点的有限集，若 n=0，称为空树
+//若 n>0，则 1.有且仅有一个特定的称为根的结点
+//           2.其余结点可分为 m（m>=0）个互不相交的有限集T1，T2，T3，……，Tm
+//森林 是 m（m>=0）棵互不相交的树的集合
+
+
+//树的存储结构:
+
+//1.双亲表示法：实现：定义结构数组，存放树的结点，每个结点含两个域
+//              数据域：存放结点本身信息
+//              双亲域：指示本结点的双亲结点在数组中的位置（双亲下标）
+typedef struct PTNode
+{
+	TElemType data;
+	int parent;//双亲位置域
+}PTNode;
+//树结构
+#define MAX 100
+typedef struct
+{
+	PTNode nodes[MAX];
+	int r, n;//根结点的位置 和 结点的数量
+}PTree;
+
+//孩子链表
+//把每个结点的孩子结点排列起来，看成是一个线性表，用单链表存储，则 n 个结点有 n 个孩子链表（叶子的孩子链表为空表）
+//而 n 个头指针又组成一个线性表，用顺序表（含 n 个元素的结构数组）存储
+//孩子结点结构
+typedef struct CTNode
+{
+	int child;
+	struct CTNode* next;//下一个孩子的地址
+}*ChildPtr;
+//双亲结点结构
+typedef struct
+{
+	TElemType data;
+	ChildPtr firstchild;//孩子链表头指针
+}CTBox;
+//树结构
+typedef struct
+{
+	CTBox nodes[MAX];
+	int n, r;//结点数 和 根结点的位置
+}CTree;
+
+
+//特点：找孩子容易，找双亲难
