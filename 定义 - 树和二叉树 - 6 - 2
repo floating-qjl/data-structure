@@ -1,0 +1,11 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include <string.h>
+
+//孩子兄弟表示法（二叉树表示法，二叉链表表示法）
+//实现：用二叉链表作树的存储结构，链表中每个结点的两个指针域分别指向其 第一个孩子结点 和 下一个兄弟结点
+typedef struct CSNode
+{
+	ElemType data;
+	struct CSNode* firstchild, * nextsibling;
+}CSNode,*CSTree;
