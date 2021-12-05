@@ -1,0 +1,70 @@
+//邻接表
+//有向图的特点：顶点 vi 的出度为第 i 个单链表中的结点个数
+//              顶点 vi 的入度为整个单链表中邻接点域值是 i-1 的结点个数
+//              找出度易，找入度难
+//可以建立逆邻接表，结点用于存储顶点的入度
+//特点：顶点 vi 的入度为第 i 个单链表中的结点个数
+//      顶点 vi 的出度为整个单链表中邻接点域值是 i-1 的结点个数
+//      找入度易，找出度难
+
+//当邻接表的存储结构形成之后，图便唯一确定
+
+//图的邻接表存储表示：
+//顶点的结点结构 data firstarc
+#define MVNum 100    //最大顶点数
+typedef struct VNode
+{
+	VerTexType data;//顶点信息
+	ArcNode* firstarc;//指向第一条依附该顶点的边的指针
+}VNode,AdjList[MVNum];//AdjList表示邻接表类型
+//AdList v 相当于 VNode v[MVNum]
+//用数组保存顶点
+
+//弧（边）的结点结构 adjvex nextrac info
+typedef struct ArcNode //边结点
+{
+	int adjvex;//该边所指向的顶点的位置
+	struct ArcNode* nextrac;//指向下一条边的指针
+	OtherInfo info;//和边相关的信息
+}ArcNode;
+
+//图的结构定义
+typedef struct
+{
+	AdjList vertices;//vertices--vertex的复数
+	int vexnum, arcnum;//图的当前顶点数和弧数
+}ALGraph;
+
+//采用邻接表表示法创建无向网
+//算法思想：1.输入总顶点数和总边数
+//          2.建立顶点表
+//            依次输入点的信息存入顶点表中，使每个表头结点的指针域初始化为NULL
+//          3.创建邻接表
+//            依次输入每条边依附的两个顶点，确定两个顶点的序号 i 和 j，建立边结点
+//            将此边结点分别插入到 vi 和 vj 对应的两个边链表的头部
+
+Status CreateUDG(ALGraph &G)//采用邻接表表示法，创建无向图G
+{
+	cin >> G.vexnum >> G.arcnum;//输入总顶点数，总边数
+	for (int i = 0;i < G.vexnum;i++)//输入各点，构造表头结点数
+	{
+		cin >> G.vertices[i].data;//输入顶点值
+		G.vertices[i].firstarc = NULL;//初始化表头结点的指针域
+	}
+	for (int k = 0;k < G.arcnum;k++)//输入各边，构造邻接表
+	{
+		cin.>>v1>>v2;//输入一条边依附的两个顶点
+		i = LOcateVex(G, v1);//在 G 中查找 v1 的位置，返回顶点下标
+		j = LocateVex(G, v2);
+		p1 = new ArcNode;//生成一个新的边结点 *p1
+		p1->adjvex = j;//邻接点序号为 j
+		p1->nextarc = G.vertices[i].firstarc;
+		G.vertices[i].firstarc = p1;//将新结点 *p1 插入顶点 vi 的边表头部
+		p2 = new ArcNode;//无向网，生成另一个对称的新的边结点 *p2
+		p2->adjvex = i;//邻接点序号为 i
+		p2->nextarc = G.vertices[j].firstarc;
+		G.vertices[j].firstarc = p2;//将新结点 *p2 插入顶点 vj 的边表头部
+		//上述为头插法，若为有向网，p2 部分可以省略，或建立逆邻接表
+	}
+	return OK;
+}
