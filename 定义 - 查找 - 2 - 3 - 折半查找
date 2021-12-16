@@ -1,0 +1,66 @@
+
+//折半查找（二分或对分查找）
+
+//折半查找：每次将待查记录所在区间缩小一半
+//非递归算法：
+//设表长为 n，low、high 和 mid 分别指向待查元素所在区间的上界，下界和中点，key 为给定的要查找的值
+//剩下步骤与 数组的二分查找一样，当 low > high 时，查找失败
+int Search_Bin(SSTable ST, KeyType key)
+{
+	low = 1;
+	high = ST.length;//置区间初始值
+	while (low <= high)
+	{
+		mid = (low + high) / 2;
+		if (ST.R[mid].key == key)
+			return mid;//找到待查元素
+		else if (key < ST.R[mid].key)//缩小查找区间
+			high = mid - 1;//继续在前半区间查找
+		else
+			low = mid + 1;//继续在后半区间查找
+	}
+	return 0;//顺序表中不存在待查元素
+}
+
+
+//递归算法
+int Search_Bin(SSTable ST, KeyType key, int low, int high)
+{
+	if (low > high)
+		return 0;//查找不到返回0
+	mid = (low + high) / 2;
+	if (ST.elem[mid].key == key)
+		return mid;
+	else if (key < ST.elem[mid].key)
+		Search_Bin(ST, key, low, mid - 1);
+	else
+		Search_Bin(ST, key, mid + 1, high);
+
+}
+
+
+//折半查找的性能分析（相当于二叉树）：
+//查找成功：比较次数 = 路径上的结点数
+//          比较次数 = 结点的层数
+//          比较次数 <=树的深度 = [ log2(n) ] + 1   （[]为取整）
+
+//查找失败：在成功的情况下的二叉树添加左右孩子，形成满二叉树（外结点，代表查找不成功的情况,外结点的权值可能为各个已有数值的中间值）
+//          比较次数 = 路径上的内部结点数 
+//          比较次数 <= [ log2(n) ] + 1
+
+
+//假设每个元素的查找概率相等，求查找成功时的平均查找长度
+//方法：ASL = 1/n * （ 每一层的结点个数 * 该层深度 的和 ）
+ 
+//平均查找长度ASL（成功时）：
+//设表长 n = 2^h - 1，则 h = log2(n+1)（此时，判定树为深度 = h 的满二叉树），且表中每个记录的查找概率相等：pi = 1/n
+//ASL = pi*ci i 从 1 到 n 的求和 
+//    = 1/n * ci i 从 1 到 n 的求和
+//    = 1/n * j * 2^(j-1) 的 j 从 1 到 h 的求和 （第 j 层的每个节点数要比较的次数）
+//    = (n+1)/n * log2(n+1) - 1
+//约等于 log2(n+1) - 1  （n > 50）
+
+//折半查找
+//时间复杂度：O(log2(n))
+//优点：效率比顺序查找高
+//缺点：只适用于有序表，且限于顺序存储结构（对线性链表无效）
