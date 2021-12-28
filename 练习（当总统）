@@ -1,0 +1,41 @@
+小明想当丑国的总统，丑国大选是按各州的投票结果来确定最终的结果的，如果得到超过一半的州的支持就可以当选，
+而每个州的投票结果又是由该州选民投票产生的，如果某个州超过一半的选民支持小明，则他将赢得该州的支持。
+现在给出每个州的选民人数，请问小明至少需要赢得多少选民的支持才能当选？
+
+
+
+
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+int test(const void* e1, const void* e2)
+{
+	return *(int*)e1 - *(int*)e2;
+}
+int main()
+{
+	int n;
+	int sum = 0;
+	while (~scanf("%d", &n), n != 0)
+	{
+		sum = 0;
+		int* arr = (int*)malloc(n * 4);
+		for (int a = 0;a < n;a++)
+			scanf("%d", &arr[a]);
+		qsort(arr, n, 4, test);
+		int b = n / 2 + 1;
+		for (int a = 0;a < b;a++)
+		{
+			if (arr[a] == 0)
+				continue;
+			sum += arr[a] / 2 + 1;
+		}
+		free(arr);
+		arr = NULL;
+		printf("%d", sum);
+	}
+	return 0;
+}
