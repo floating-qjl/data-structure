@@ -1,0 +1,45 @@
+
+//快速排序 --- 改进的交换排序
+//任取一个元素为中心
+//所有比它小的元素一律前放，比它大的元素一律后放，形成左右两个子表
+//对各子表重新选择中心元素并依次规则调整（递归思想）
+//直到每个子的元素只剩一个
+
+//基本思想：通过一趟排序，将待排序记录分割成独立的两部分，其中一部分记录的关键字
+//均比另一部分记录的关键字小，则可分别对这两部分记录进行排序，以达到整个序列有序
+
+//具体实现：选定一个中间数作为参考，所有元素与之比较，小的调到其左边，大的调到其右边
+//中间数：可以是第一个数，最后一个数、最中间一个数、任选一个数等
+//每一趟的子表的形成是采用从两头向中间交替式逼近法
+//由于每趟中对各子表的操作都相似，可采用递归算法
+int Partition(SqList& L, int low, int high)
+{
+	L.r[0] = L.r[low];
+	pivotkey = L.r[low].key;
+	while (low < high)
+	{
+		while (low < high && L.r[high].key >= pivotkey)
+			high--;
+		L.r[low] = L.r[high];
+		while (low < high && L.r[low].key <= pivotkey)
+			low++;
+		L.r[high] = L.r[low];
+	}
+	L.r[low] = L.r[0];
+	return low;
+}
+void QSort(SqList& L, int low, int high)//对顺序表L快速排序
+{
+	if (low < high)//长度大于1
+	{
+		pivotloc = Partition(L, low, high);//将L.r[low...high]一分为二，
+										   //pivotloc为枢轴元素排好序的位置
+										   //找中心点位置
+		Qsort(L, low, pivotloc - 1);//对低子表递归排序
+		Qsort(L, pivotloc + 1, high);//对高子表递归排序
+	}
+}
+void main()
+{
+	QSort(L, 1, L.length);
+}
